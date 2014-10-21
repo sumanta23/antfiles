@@ -1,0 +1,28 @@
+<project name="common">
+	
+<property name="server" value="C:/myfiles/Server"/> 
+<property name="jboss-home" value="${server}/jboss-as-7.1.1.Final"/>
+<property name="tomcat-home" value="${server}/apache-tomcat-7.0.32"/>
+
+<property name="jboss.server" value="localhost"/>
+<property name="tomcat.server" value="localhost"/>	
+	
+<property name="tomcat.url" value="http://${tomcat.server}:8081/manager/text"/>
+<property name="tomcat.username" value="deploymngr"/>
+<property name="tomcat.password" value="pass"/>	
+
+<property name="src.dir"     value="src"/>
+<property name="ejbsrc.dir"     value="ejbModule"/>
+<property name="build.dir"   value="build"/>
+<property name="classes.dir" value="${build.dir}/classes"/> 
+<property name="lib.dir"  value="lib"/>
+	
+	
+	<property name="war.dir"   value="${build.dir}/war"/>     
+	<property name="jar.dir"   value="${build.dir}/jar"/>
+	<property name="ear.dir"   value="${build.dir}/ear"/>
+	
+<property name="webroot.dir" value="WebContent"/>
+<property name="webinf.dir" value="${webroot.dir}/WEB-INF"/>
+<property name="weblib.dir" value="${webinf.dir}/lib"/>
+</project>

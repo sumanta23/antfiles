@@ -1,0 +1,56 @@
+<project default="build" name="myEAPEJB" basedir=".">
+	<import file="common.xml" />
+
+	<import file="jboss-lib.xml" />
+	<import file="jboss.xml" />
+
+	<!--import file="tomcat-lib.xml"/-->
+	<!--import file="tomcat.xml"/-->
+
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="deploy.context" value="/${ant.project.name}" />
+	<property name="deploy.jar" value="${basedir}/${war.dir}/${ant.project.name}.jar" />
+
+	<path id="Web App Libraries.libraryclasspath" />
+	<path id="EAR Libraries.libraryclasspath" />
+
+	<path id="myEAPEJB.classpath">
+		<pathelement location="build/classes" />
+		<path refid="JBoss.libraryclasspath" />
+		<!--path refid="tomcat.libraryclasspath"/-->
+		<path refid="Web App Libraries.libraryclasspath" />
+		<path refid="EAR Libraries.libraryclasspath" />
+	</path>
+
+	<target name="init">
+		<mkdir dir="${classes.dir}" />
+		<copy includeemptydirs="false" todir="${classes.dir}">
+			<fileset dir="${ejbsrc.dir}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="${classes.dir}" includeantruntime="false">
+			<src path="${ejbsrc.dir}" />
+			<classpath refid="${ant.project.name}.classpath" />
+		</javac>
+	</target>
+
+	<target name="build" depends="compile">
+		<jar destfile="${ear.dir}/${ant.project.name}.jar">
+			<fileset dir="${classes.dir}">
+				<include name="**/*.class" />
+			</fileset>
+			<fileset dir="${ejbsrc.dir}/">
+				<include name="META-INF/*" />
+			</fileset>
+		</jar>
+	</target>
+</project>

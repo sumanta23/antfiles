@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<project name="jboss">
+<import file="common.xml"/>
+<import file="build.xml"/>
+    <property name="jboss.home" value="${jboss-home}" />
+    <property name="app.name" value="test.war" />
+    <property name="app.path" value="${app.name}" />
+ 
+    <presetdef name="jboss-cli">
+      <java jar="${jboss.home}/jboss-modules.jar" fork="true" >
+        <arg line="-mp ${jboss.home}/modules org.jboss.as.cli -c" />
+      </java>
+    </presetdef>
+ 
+    <target name="deploy">
+      <jboss-cli failonerror="true">
+        <arg line="'deploy --force ${app.path}'" />
+      </jboss-cli>
+    </target>
+ 
+    <target name="undeploy">
+      <jboss-cli failonerror="true">
+        <arg line="'undeploy ${app.name}'" />
+      </jboss-cli>
+    </target>
+ 
+    <target name="restart">
+      <jboss-cli failonerror="true">
+        <arg line="':shutdown(restart=true)'" />
+      </jboss-cli>
+    </target>
+</project>

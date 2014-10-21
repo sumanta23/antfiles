@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="tomcat-lib">
+<path id="tomcat.libraryclasspath">
+		<fileset dir="${tomcat-home}/lib">
+	      <include name="*.jar" />
+	    </fileset>
+		<fileset dir="${tomcat-home}/bin">
+		  <include name="tomcat-juli.jar" />
+		</fileset>
+</path>
+</project>
